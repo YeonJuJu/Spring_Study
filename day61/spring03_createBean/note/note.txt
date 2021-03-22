@@ -1,0 +1,87 @@
+spring.io
+spring framework
+version 확인
+
+maven repository
+spring context 검색
+
+https://mvnrepository.com/artifact/org.springframework/spring-context
+
+
+
+maven repository
+slf4j 검색 > SLF4J API Module
+https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.25
+
+
+logback 검색 > Logback Classic Module
+https://mvnrepository.com/artifact/ch.qos.logback/logback-classic/1.2.3
+
+
+   
+  IoC : Inversion of Control - 제어(의) 역전
+  
+  개발자가 coding을 해서 프로그램의 흐름을 제어하지 않고
+  (개발자가 code의 흐름이나 객체 생성 code를 
+   Spring framework 가 사용하는 파일(xml) 에 작성해 놓으면)
+   Spring framework 가 객체(bean)를 생성해서 반환하고
+                       code가 동작하는 순서를 결정함
+  
+
+  POJO : Plain Old Java Object
+         Java Model 이나, 기능, framework 에 구애받지 않고
+         독립적이면서 단순한 기능을 가진 객체
+         
+         자바에서는 이러한 객체를 bean이라고도 함
+         
+         
+  Spring framework  <-- IoC Container
+  
+                                Java POJO (classes)
+                                
+                                       ↓
+  
+      xml 등에 설정해 놓은  ___  IoC Container
+        data (Metadata)         (Spring Container)  
+      (Java code로도 설정함)  
+                                       ↓
+                                  
+                                  사용할 준비를 함      
+                              Ready to use Application
+                                             (class)
+                                
+  
+  
+  IoC Container 종류
+  
+  
+  - BeanFactory
+  
+  - ApplicationContext
+  
+  
+  
+  [ BeanFactory ]
+  
+  - 클래스를 통해서 객체를 생성하고 이 객체를 전달함
+  - 상속 등 객체 간의 관례를 형성하고 관리함
+  - Bean 에 관련된 설정을 위한 xml 파일은
+    바로 loading 하지만, 객체는 개발자가 필요로 할 때 생성함
+  - XmlBeanFactory
+  
+  
+  [ ApplicationContext ]
+  
+  - 클래스를 통해서 객체를 생성하고 이 객체를 전달함
+  - 상속 등 객체 간의 관례를 형성하고 관리함  
+  - 국제화 지원 등 문자열에 관련된 다양한 기능을 제공함
+  - listener 로 등록되어있는 Bean에 Event를 발생시킬 수 있음
+  - Bean 에 관련된 설정을 위한 xml 파일을 바로 loading하며
+    객체를 미리 생성해서 보관하고 있음
+  - ClassPathXmlApplicationContext
+  - FileSystemXmlApplicationContext
+  - XmlWebApplicationContext
+  
+      
+         
+   
