@@ -1,0 +1,24 @@
+
+
+  BeanPostProcessor
+  
+  Bean 객체를 정의할 때 init-method 속성을 설정하면
+  객체가 생성될 때 자동으로 호출될 메소드를 지정할 수 있음
+  
+  이 때, BeanPostProcessor interface를 구현한(implements)
+  클래스의 정의하면 Bean 객체를 생성할 때 호출될 init 메소드의
+  실행 전후로 다른 메소드를 호출할 수 있도록 할 수 있음
+  
+  
+  postProcessBeforeInitialization
+   <-- init-method 에 등록된 메소드가 호출되기 전에 호출됨
+  
+  postProcessAfterInitialization
+   <-- init-method 에 등록된 메소드가 호출된 후에 호출됨
+   
+   
+  init-method 가 등록되어있지 않은 경우에도 자동으로 호출됨
+  
+   
+  
+  

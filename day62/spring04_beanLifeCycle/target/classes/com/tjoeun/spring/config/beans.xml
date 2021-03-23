@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd"
+ default-init-method="default_init"
+ default-destroy-method="default_destroy"
+   >
+   
+  <bean id="test1" class="com.tjoeun.spring.bean.TestBean1"
+  		lazy-init="true"
+  		init-method="bean1Init"
+  		destroy-method="bean1Destroy"/>
+  		
+  <bean id="test2" class="com.tjoeun.spring.bean.TestBean2"
+  		lazy-init="true"/>
+  		
+  <bean id="test3" class="com.tjoeun.spring.bean.TestBean3"
+  		lazy-init="true"
+  		init-method="bean3Init"
+  		destroy-method="bean3Destroy"/>
+  		
+  <bean id="test4" class="com.tjoeun.spring.bean.TestBean4"
+  		lazy-init="true"
+  		init-method="bean4Init"
+  		destroy-method="bean4Destroy"/>
+   
+</beans>

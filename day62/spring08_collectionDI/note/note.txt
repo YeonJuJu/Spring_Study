@@ -1,0 +1,10 @@
+
+  Collection Dependency Injection
+   컬렉션     (의존성)    주입
+   
+   Bean 을 정의할 때 주입해야 하는 멤버가
+   Collection 인 경우
+   Collection 이 관리할 객체를 초기에 설정함
+   
+   List, Map, Set, Properties 등을 사용함
+   

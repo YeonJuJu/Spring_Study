@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+  <!-- ApplicationContext 를 사용해서 xml을 loading 할 때 -->
+  <!-- 자동으로 bean 객체가 생성됨  -->
+  <!-- 
+    (자동주입을 사용하지 않으면)
+    id 속성이 없을 때는 객체의 주솟값을 받을 수 없음
+  -->
+  <bean class="com.tjoeun.spring.bean.TestBean" />
+  
+  
+  <!-- ApplicationContext 를 사용해서 xml을 loading 할 때 -->
+  <!-- 자동으로 bean 객체가 생성됨  -->
+  <!-- id 속성에 설정된 값을 getBean() 로 받아옴   -->
+  <!-- 한 번 생성된 객체는 더 이상 생성되지 않음 : Singleton   -->
+  <bean id="test1" class="com.tjoeun.spring.bean.TestBean" />
+  
+  
+  <!-- lazy-init="true" : defalut - false  -->
+  <!-- ApplicationContext 를 사용해서 xml을 loading 할 때 -->
+  <!-- 자동으로 bean 객체가 생성되지 않음  -->
+  <!-- getBean() 로 주소값을 받아올 때 객체가 생성됨  -->
+  <!-- scope를 prototype으로 설정하지 않으면 default는 singleton임   -->
+  <bean id="test2" class="com.tjoeun.spring.bean.TestBean" lazy-init="true"/>
+  
+  
+  <!-- scope="prototype" -    -->
+  <!-- ApplicationContext 를 사용해서 xml을 loading 할 때 -->
+  <!-- 자동으로 bean 객체가 생성되지 않음  -->
+  <!-- getBean() 로 주소값을 받아올 때마다 객체가 생성됨  -->
+  <bean id="test3" class="com.tjoeun.spring.bean.TestBean" scope="prototype"/>
+   
+</beans>

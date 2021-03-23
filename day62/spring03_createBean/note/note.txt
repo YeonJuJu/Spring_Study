@@ -1,0 +1,19 @@
+
+ bean 태그의 속성
+ 
+ <bean id= "t1" class="com.tjoeun.beans.BeanTest"/>
+ 
+ 
+ class : 객체를 생성할 클래스를 지정함
+ id    : bean 객체를 가져오기 위한 이름(참조변수)을 지정함
+ lazy-init : Singleton 인 경우, 
+             xml을 loading할 때 객체 생성 여부를 결정함
+             true <-- xml을 loading 할 때 객체를 생성하지 않고
+                      객체를 가져올 때(getBean()) 생성함
+ scope : 객체의 범위를 설정
+         singleton : 객체를 하나만 생성해서 사용함
+         prototype : 객체를 가져올 때마다 객체를 생성함
+         
+         
+         
+   

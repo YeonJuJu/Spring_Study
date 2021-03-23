@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd"
+   >
+   
+  <bean id="test1" class="com.tjoeun.spring.bean.TestBean1">
+  	<!-- list 애들 세팅 -->
+  	
+  	<property name="listString">
+  		<list>
+  			<value>hello</value>
+  			<value>spring</value>
+  			<value>java</value>
+  		</list>
+  	</property>
+  	
+  	<property name="listInteger">
+  		<list>
+  			<value>111</value>
+  			<value>222</value>
+  			<value>222</value>
+  			<value>333</value>
+  		</list>
+  	</property>
+  	
+  	<!-- 직접 데이터를 생성하여 추가하는 방법 -->
+  	<!-- <property name="listPerson">
+  		<list>
+  			<bean class="com.tjoeun.spring.bean.Person">
+  				<constructor-arg value="유관순" type="java.lang.String"/>
+  				<constructor-arg value="19" type="int"/>
+  			</bean>
+  			
+  			<bean class="com.tjoeun.spring.bean.Person">
+  				<constructor-arg value="김상옥" type="java.lang.String"/>
+  				<constructor-arg value="26" type="int"/>
+  			</bean>
+  			
+  			<bean class="com.tjoeun.spring.bean.Person">
+  				<constructor-arg value="정호석" type="java.lang.String"/>
+  				<constructor-arg value="28" type="int"/>
+  			</bean>
+  		</list>
+  	</property> -->
+  	
+  	<!-- 외부에서 선언한 데이터를 불러와 추가하는 방법 -->
+  	<property name="listPerson">
+  		<list>
+  			<ref bean="p2"></ref>
+  			<ref bean="p3"></ref>
+  		</list>
+  	</property>
+  	
+  	<!-- set 애들 세팅 -->
+  	
+  	<property name="setString">
+  		<list>
+  			<value>hello</value>
+  			<value>spring</value>
+  			<value>java</value>
+  			<value>hello</value>
+  			<value>spring</value>
+  			<value>java</value>
+  		</list>
+  	</property>
+  	
+  	<property name="setInteger">
+  		<list>
+  			<value>111</value>
+  			<value>222</value>
+  			<value>222</value>
+  			<value>333</value>
+  			<value>111</value>
+  			<value>222</value>
+  			<value>222</value>
+  			<value>333</value>
+  		</list>
+  	</property>
+  	
+  	<property name="setPerson">
+  		<list>
+  			<bean class="com.tjoeun.spring.bean.Person">
+  				<constructor-arg value="유관순" type="java.lang.String"/>
+  				<constructor-arg value="19" type="int"/>
+  			</bean>
+  			
+  			<bean class="com.tjoeun.spring.bean.Person">
+  				<constructor-arg value="김상옥" type="java.lang.String"/>
+  				<constructor-arg value="26" type="int"/>
+  			</bean>
+  			
+  			<bean class="com.tjoeun.spring.bean.Person">
+  				<constructor-arg value="정호석" type="java.lang.String"/>
+  				<constructor-arg value="28" type="int"/>
+  			</bean>
+  			
+  			<bean class="com.tjoeun.spring.bean.Person">
+  				<constructor-arg value="유관순" type="java.lang.String"/>
+  				<constructor-arg value="19" type="int"/>
+  			</bean>
+  			
+  			<bean class="com.tjoeun.spring.bean.Person">
+  				<constructor-arg value="김상옥" type="java.lang.String"/>
+  				<constructor-arg value="26" type="int"/>
+  			</bean>
+  			
+  			<bean class="com.tjoeun.spring.bean.Person">
+  				<constructor-arg value="정호석" type="java.lang.String"/>
+  				<constructor-arg value="28" type="int"/>
+  			</bean>
+  		</list>
+  	</property>
+  	
+  	<property name="map">
+  		<map>
+  			<entry key="map1" value="맵1"></entry>
+  			<entry key="map2" value="2" value-type="int"></entry>
+  			<entry key="map3">
+  				<bean class="com.tjoeun.spring.bean.Person">
+  					<property name="name" value="연개소문"/>
+  					<property name="age" value="62"/>
+  				</bean>
+  			</entry>
+  			
+  			<entry key="map4" value-ref="p2"></entry>
+  			
+  			<entry key="map5">
+  				<list>
+  					<value>JAVA</value>
+  					<value>JSP</value>
+  					<value>Spring</value>
+  				</list>
+  			</entry>
+  		</map>
+  	</property>
+  	
+  	<property name="proper1">
+ 		<props>
+  			<prop key="subject1">java</prop>
+  			<prop key="subject2">jsp</prop>
+  			<prop key="subject3">oracle</prop>
+  		</props>
+  	</property>
+  </bean>
+
+  <bean id="p2" class="com.tjoeun.spring.bean.Person">
+  	<property name="name" value="양만춘"></property>
+  	<property name="age" value="32"></property>
+  </bean>
+  
+  <bean id="p3" class="com.tjoeun.spring.bean.Person">
+  	<property name="name" value="을지문덕"></property>
+  	<property name="age" value="42"></property>
+  </bean>
+</beans>

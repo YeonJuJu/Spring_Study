@@ -1,0 +1,11 @@
+
+
+	Setter 메서드를 통한 주입
+	
+	name : data를 주입할 property 이름
+	value : 기본 자료형이나 String type을 주입할 때 사용
+	
+	객체를 주입하는 경우
+	ref : 객체의 주솟값을 주입할 때 사용  
+	
+	

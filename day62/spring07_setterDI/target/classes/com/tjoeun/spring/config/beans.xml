@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd"
+   >
+   
+   <!-- property로 지정하는 것이 setter 이용해 인자 저장하는 역할 -->
+  <bean id="test1_1" class="com.tjoeun.spring.bean.TestBean1">
+  	<property name="dataI" value="111"/>
+  	<property name="dataD" value="123.123"/>
+  	<property name="dataS" value="spring"/>
+  	<property name="person1">
+  		<bean class="com.tjoeun.spring.bean.Person">
+  			<constructor-arg value="김좌진" type="java.lang.String"/>
+  			<constructor-arg value="36" type="int"/>
+  		</bean>
+  	</property>
+  	<property name="person2" ref="p"/>
+  </bean>
+  
+  <bean id="p" class="com.tjoeun.spring.bean.Person">
+  	<property name="name" value="박제상"/>
+  	<property name="age" value="40"/>
+  </bean>
+  
+</beans>
