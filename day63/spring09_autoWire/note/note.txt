@@ -1,0 +1,83 @@
+
+
+  AutoWire
+  자동 주입
+  
+  Bean 을 정의할 때 주입할 객체는
+  생성자를 통해서 주입하거나
+  setter를 통해서 주입함
+  
+  자동주입 (autowire)
+  이름, 타입, 생성자를 통해서 할 수 있음
+  
+  
+  1) 이름을 통해서 주입하기 (byName)
+  
+  <bean autowire="byName"  />
+  
+  autowire 속성 값을 byName 이라고 할당하면
+              : Bean 객체(BeanTest01)의 
+                property 이름(멤버변수 이름) 과 
+                (<-- data1, data2)
+                beans.xml 에 정의한 bean 태그 중에서
+                id 속성값으로 정한(할당한)과 같은 것을 찾아서
+                자동으로 주입함
+                정의된 Bean의 이름이 
+  
+  -- beans.xml --         
+  <bean id="data1" class="com.tjoeun.beans.BeanData1" />           
+  <bean id="data2" class="com.tjoeun.beans.BeanData2" />
+  
+             
+  -- BeanTest01 --
+  
+  private BeanData1 data1;
+  private BeanData2 data2;
+  
+  
+  
+  
+  2) Type을 통해서 주입하기 (byType)
+  
+  <bean autowire="byType"  />
+  
+  byType  : Bean 객체의 property의 type과 
+            BeanTest01   속성(멤버변수:data1, data2) <-- BeanData1
+  
+            정의된 Bean의 type을 같게 설정한 경우
+            beans.xml에 정의된 <bean class="경로(package 명).클래스이름" />
+                                            com.tjoeun.beans.BeanData1
+            자동 주입됨
+  
+  
+  **********************************************************
+   이 경우, 같은 type의 Bean이 두 개 이상 정의되어있으면
+   오류가 발생함
+  **********************************************************
+  
+               
+  
+  3) 생성자를 통해서 주입하기 (constructor)
+  
+  <bean autowire="constructor"  />
+  
+  constructor : 생성자의 매개변수 type과 
+                (TestBean3 클래스의 매개변수 있는 생성자) 
+  
+                정의된 Bean 의 type이 일치하면 자동 주입됨
+                (beans.xml bean 태그를 만들면서 class 속성에
+                 할당하는 클래스이름이 일치하면
+                 BeanTest03 클래스의 멤버변수의 값이
+                 자동으로 주입됨)  
+                 
+                 
+                 
+    <bean class="com.tjoeun.BeanData2" />             
+  
+  **********************************************************
+   이 경우, 같은 type의 Bean이 두 개 이상 정의되어있으면
+   오류가 발생함
+  **********************************************************
+  
+  
+  

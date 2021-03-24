@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd"
+   >
+   
+   <bean id="xml1" class="com.tjoeun.spring.bean.TestBean1"/>
+   <bean id="xml2" class="com.tjoeun.spring.bean.TestBean2" lazy-init="true"/>
+   <bean id="xml3" class="com.tjoeun.spring.bean.TestBean3" scope="prototype"/>
+   <bean class="com.tjoeun.spring.bean.TestBean4"/>
+   <!-- primary 속성을 지정하면 무기명 객체를 사용할 때 여러개가 있다면 해당 객체를  main에 가져간다 -->
+   <bean class="com.tjoeun.spring.bean.TestBean4" primary="true"/> 
+</beans>

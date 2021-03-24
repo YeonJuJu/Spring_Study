@@ -1,0 +1,15 @@
+
+  init, destroy 메소드
+  
+    객체가 생성될 때나 소멸될 때
+    자동으로 호출되는 메소드
+    
+    1) xml
+    init-method="bean01Init"
+    destroy-method="bean01Destroy"
+    
+    2) Annotation
+    @Bean(initMethod="bean01Init", destroyMethod="bean01Destroy")
+    
+    
+    

@@ -1,0 +1,22 @@
+  Annotation 을 사용한 설정
+  
+  
+  @Configuration  <-- beans.xml 의 역할을 함
+                  현재 java 파일이 Bean 등록을 위한
+                  java 파일인지 알려줌
+                  
+  @Bean
+    bean 객체를 정의할 때 사용함  <bean ..... />
+    메소드의 이름이 bean의 이름(xml에서의 id)이 됨
+    @Bean(name=이름) <-- bean의 이름을 새로 정의함
+    @Lazy : lazy-init 속성을 지정함
+    @Scope : bean의 scope 속성을 지정함
+    @Primary : primary 속성을 지정함  
+    
+    
+    
+    
+    
+    
+    
+  
