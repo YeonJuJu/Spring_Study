@@ -1,0 +1,43 @@
+ 
+  MyBatis
+  
+    SpringFramework에서 사용하는 JDBC library를 
+    편리하게 사용하도록 해 주는 library
+    
+    Query 문 작성을 Mapper(xml, class)에서 
+    할 수 있도록 해 줌
+    
+   
+  maven repository
+  
+  MyBatis » 3.5.5
+  MyBatis Spring » 2.0.5
+  
+  
+  -- table 만들기 --
+  
+  create table jdbcTest(
+    intData number not null,
+    strData varchar2(500) not null
+  );
+  
+	select * from jdbcTest;
+	
+	insert into jdbcTest values(1, '이순신');
+	insert into jdbcTest values(2, '김유신');
+	insert into jdbcTest values(3, '안중근');
+	insert into jdbcTest values(4, '윤봉길');
+	insert into jdbcTest values(5, '강감찬');
+	
+	
+	update jdbcTest set intData=1 where strData='이순신';
+	
+	
+	commit;
+  
+    insert into jdbcTest values(6, '유관순'); 
+  
+    update jdbcTest set srtData='연개소문' where intData=5;
+  
+  
+  

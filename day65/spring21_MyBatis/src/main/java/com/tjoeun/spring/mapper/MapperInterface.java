@@ -1,0 +1,30 @@
+package com.tjoeun.spring.mapper;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import com.tjoeun.spring.bean.JDBCDTO;
+
+public interface MapperInterface {
+	
+//	@Results({@Result(column="int_data", property="int_data"), 
+//		      @Result(column="str_data", property="str_data")
+//	        })
+	@Select("select * from jdbc_test")
+	List<JDBCDTO> select_data();
+	
+	@Insert("insert into jdbc_test values(#{int_data}, #{str_data})")
+	void insert_data(JDBCDTO dto);
+	
+	@Update("update jdbc_test set str_data=#{str_data} where int_data=#{int_data}")
+	void update_data(JDBCDTO dto);
+	
+	@Delete("delete from jdbc_test where int_data=#{int_data}")
+	void delete_data(int int_data);
+}

@@ -1,0 +1,29 @@
+ 
+  @AspectJ
+    ㄴ @AspectJ 어노테이션을 사용해서
+       Advisor 역할을 할 Bean 을 설정함
+       
+       
+       <aop:aspectj-autoproxy />
+         ㄴ Advisor 역할을 하는 클래스에 설정된
+            Annotation 을 이용해서 Aspect를 설정하라는 의미
+       
+       @EnableAspectAutoProxy
+         ㄴ @Configuration 으로 설정한
+             클래스에서 사용하면
+             <aop:aspectj-autoproxy />과 같은 의미를 갖음
+             
+             
+ @Before  : 관심사(기준이 되는 메소드) 호출 이전에 호출됨
+ @After   : 관심사(기준이 되는 메소드) 호출 이후에 호출됨
+ @Around  : 관심사(기준이 되는 메소드) 호출 이전과 이후에 호출됨
+ @AfterReturning : 관심사가 실행될 때 예외 발생 없이 정상적으로 종료되었을 때 호출됨
+ @AfterThrowing  : 관심사가 실행될 때 예외 발생하여 종료되었을 때 호출됨
+
+
+
+
+
+             
+             
+             
