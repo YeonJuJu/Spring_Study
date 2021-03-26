@@ -1,0 +1,16 @@
+
+  @Lazy  (lazy-init="true")
+  
+    ㄴ getBean() 메소드를 호출할 때
+              
+       (Bean 객체가 생성되면서 주소를 받아옴)
+       
+       @Component
+       @Lazy
+       public class Ex01{
+       
+       } 
+  
+  @Scope("prototype")
+  
+  

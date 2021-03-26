@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xsi:schemaLocation=
+   "http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+  
+  <bean id="xml1" class="com.tjoeun.spring.bean.TestBean1"/>
+  <bean id="xml2" class="com.tjoeun.spring.bean.TestBean2"/>
+  <bean id="xml3" class="com.tjoeun.spring.bean2.TestBean1"/>
+  
+  <bean id="advisor" class="com.tjoeun.spring.advice.Advisor"/>
+  
+  <aop:config>
+  	<aop:aspect ref="advisor">
+  		<!-- <aop:pointcut  id="point1" expression="execution(void com.tjoeun.spring.bean.TestBean1.method1())"/> -->
+  		<!-- <aop:pointcut  id="point1" expression="execution(void com.tjoeun.spring.bean.TestBean1.method1(int))"/> -->
+  		<!-- <aop:pointcut  id="point1" expression="execution(void com.tjoeun.spring.bean.TestBean1.method1(java.lang.String))"/> -->
+  		<!-- <aop:pointcut  id="point1" expression="execution(void com.tjoeun.spring.bean.TestBean1.method1(int , int))"/> -->
+  		<!-- <aop:pointcut  id="point1" expression="execution(void com.tjoeun.spring.bean.TestBean1.method1(*))"/> -->
+  		<!-- <aop:pointcut  id="point1" expression="execution(void com.tjoeun.spring.bean.TestBean1.method1(int, java.lang.String))"/> -->
+  		<!-- <aop:pointcut  id="point1" expression="execution(void com.tjoeun.spring.bean.TestBean1.method1(*, *))"/> -->
+  		
+  		<!-- ..의 의미는 타입과 갯수 상관 없이 모든 함수 포함 -->
+  		<!-- <aop:pointcut  id="point1" expression="execution(void com.tjoeun.spring.bean.*.*(..))"/> -->
+  		
+  		<!-- <aop:pointcut  id="point1" expression="execution(void com.tjoeun.spring.*.*.*(..))"/> -->
+  		<!-- <aop:pointcut  id="point1" expression="execution(int *.*(..))"/> -->
+  		
+  		<aop:pointcut  id="point1" expression="execution(* *.*(..))"/>
+  		<aop:before method="beforeMethod" pointcut-ref="point1"/>
+  	</aop:aspect>
+  </aop:config>
+  
+</beans>   
+
+
+
+
+
+
+
+
+
+
