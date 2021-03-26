@@ -1,0 +1,37 @@
+
+
+
+ Dynamic Web Project > Mave Project
+ 
+ 프로젝트 오른쪽 클릭 > Configure 
+ > convert to maven project
+ 
+ 
+  pom.xml 에서 
+  dependency(java library(jar)) 설정하기
+  
+  servlet-api
+  
+  jsp-api
+  
+  jstl
+  
+  springWebMVC
+  
+  
+  https://mvnrepository.com/
+  
+  servlet 검색 > Java Servlet API > Java Servlet API » 4.0.1
+  
+  
+  jsp 검색 > JavaServer Pages(TM) API (2018) > JavaServer Pages(TM) API » 2.3.3
+  
+  
+  jstl 검색 > JSTL (2015) >  JSTL » 1.2
+  
+  
+  spring Web MVC 검색 > Spring Web MVC > Spring Web MVC » 5.2.9.RELEASE
+  
+  
+  
+  
