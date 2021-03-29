@@ -1,0 +1,22 @@
+
+  Java Annotation 으로 설정하기
+  
+  Spring MVC 는 Java Annotation 으로도 설정할 수 있음
+  
+  web.xml 
+  --> AbstractAnnotationConfigDispatcherServletInitializer
+      를 상속하거나
+      
+      WebApplicationInitializer 인터페이스를 구현함
+      
+      
+      
+      
+  root-context.xml --> RootAppContext.java
+  
+  servlet-context.xml --> WebMvcConfigurer 인터페이스를 구현함
+                          ServletAppContext.java
+  
+  
+  
+  
