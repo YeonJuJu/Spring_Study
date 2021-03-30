@@ -1,0 +1,33 @@
+
+
+  parameter에 Object로 주입받기
+  
+  
+    Map 으로 주입받기
+    
+      client가 전달하는 모든 parameter를 
+      한 번에 Map으로 받을 수 있음
+      
+      단, 같은 이름으로 전달되는 2 개 이상의 
+      data 는 (맨 처음) 하나만 담기게 됨
+      
+      같은 이름으로 전달되는 parameter가 
+      2 개 이상인 경우에는 
+      List 로 주입 받음 <-- @RequestParam
+    
+      
+      
+  @ModelAttribute  (생략 가능함)
+    
+    ㄴ parameter 를 객체로 받음
+                      ㄴ command Object
+                          커멘드 객체 
+    
+    전달되는 parameter 의 이름하고 같은
+     에 자동 주입됨
+    
+    
+    
+    
+    
+    

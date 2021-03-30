@@ -1,0 +1,53 @@
+
+  Servlet, JSP  URL
+  
+    사용자가 서버에 접속해서 서비스를 받기 위해
+    입력하는 주소를 URL 이라고 함
+    
+    
+  springMVC04URLMapping 
+                                        context path
+  프로토콜://(ip)도메인주소:포트번호/경로(프로젝트이름)/하위경로1/하위경로2/ ......
+  http://ip address:port number/context path/         
+  http://localhost:8080/springMVC02_URLMapping /  
+
+
+  http  <-- hyper text transfer protocol
+     
+            world wide web 상에서 정보를 주고받기 위한
+            프로토콜(기본규약)
+            서버와 클라이언트 사이의 통신을 위한 규약
+            
+            
+  포트번호 : 컴퓨터 내부의 프로그램을 구분하기 위해서 사용함
+    
+     0 ~ 65535  (65536 개) :          
+     0 ~ 1023 번지까지는 System에서 사용함 (1024 개) 
+     
+     80 
+     
+     
+  localhost:8090/tjoeun/test.txt   
+            
+            <-- tjoeun : context path
+            
+            
+            
+  Spring MVC 에서는 Context Path 다음에 나오는 주소를
+  실제 경로와 다른게 지정할 수 있음
+  
+  
+  하위 경로
+  
+             
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

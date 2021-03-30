@@ -1,0 +1,70 @@
+
+
+  -- ViewResolver --
+  
+    Controller 에서 전달받은 View 의 이름으로
+    jsp 를 찾고 jsp data 를 분석해서
+    응답 결과를 만들어서 전달함
+    
+    1)
+    ViewResolver 가 사용할 View 의 이름을 지정하기
+    
+    2)
+    jsp를 통해서 응답 결과를 만들 때
+    data를 전달하기
+    
+    
+    index.jsp
+	button - 요청 정보
+	 <- DispatcherServlet가 받음
+	 <- DispatcherServlet 
+	    요청정보 분석
+	 <- DispatcherServlet
+	    Controller를 선택함
+	@GetMapping("/test1") 메소드
+	가 실행됨
+	return "test1";<-- test1.jsp
+	  ㄴ view의 이름 결정(test1)
+	 test1.jsp을 ViewResolver가 받음
+	 /WEB-INF/views/test1.jsp 를 찾고 분석 및 실행
+	
+	 <-- 결과를 다시 DispatcherServlet로 보냄
+ 
+ 
+ 
+    
+    HttpServletRequest
+    
+      Spring MVC 는 jsp 를 처리할 때
+      HttpServletRequest 객체를 jsp 쪽으로 전달함
+      
+      ViewResolver 는 이것을 이용해서
+      jsp 작업시 data 를 사용함
+      
+    
+    Model
+    
+      Model 객체를 주입받아서 설정하면
+      data가 HttpServletRequest 객체에 담겨
+      이 data를 jsp 전달함
+      
+      
+    ModelAndView  
+      
+      ModelAndView 는 
+      Model 에 값을 설정도 하고 : addObject()
+      View의 이름을 지정도 함   : setName()
+      
+        
+      
+  -- 요 약 --
+  
+    ViewResolver 에 의해서 
+    jsp 가 실행되고 응답결과가 만들어짐
+    
+    Controller 에서 View 지정할 때
+    ViewResolver 가 사용할 data 를 
+    Request 영역에 저장함
+      
+      
+      

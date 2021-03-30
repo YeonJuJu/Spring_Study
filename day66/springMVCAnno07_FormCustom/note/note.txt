@@ -1,0 +1,16 @@
+
+
+  Form 태그
+  
+    Spring Framework 에서는
+    <form:태그이름 > 형태의 커스텀 태그를 지원함
+    
+    Form 커스텀 태그를 사용하면
+    Model 객체에 들어있는 값을
+    form 요소에 주입할 수 있음
+    
+    
+<%@ taglib prefix="form" 
+   uri="http://www.springframework.org/tags/form" %>
+   
+      

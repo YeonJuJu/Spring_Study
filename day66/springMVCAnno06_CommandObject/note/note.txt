@@ -1,0 +1,30 @@
+
+
+  커멘드 객체 (Command Object)
+  
+  
+    클라이언트가 전달해 주는 
+    parameter data 를 주입받을 때 
+    사용하는 객체
+    
+  
+    
+  Request 를 통해서 전달하기
+  
+    커맨드 객체는 HttpServletRequest 객체에 
+    자동으로 담겨서(저장되어서) jsp 로 전달됨
+    
+    이 때, HttpServletRequest 객체에 
+    저장되는 이름은 -- request.setAttribute("id",id)
+    클래스 이름으로 결정됨 <-- 첫 글자가 소문자로 저장됨 
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+    

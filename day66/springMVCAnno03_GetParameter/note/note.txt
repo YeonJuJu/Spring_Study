@@ -1,0 +1,62 @@
+
+
+  HttpServletRequest 사용
+  
+    Spring MVC 는 필요한 객체나 data를 
+    주입받아서(Injection) 사용함
+    
+    Servlet/JSP 에서 parameter를 추출할 때,
+    HttpServletRequest 객체를 통함
+    Spring MVC 에서 이 객체를 받아서 사용함
+    
+    parameter 를 추출하거나
+    HttpServletRequest 객체가 필요한 경우에 사용함
+    
+    
+    @GetMapping("test01")
+    public String test01(HttpServletRequest request){
+      
+      String id = request.getParameter("id");
+      String pw = request.getParameter("pw");
+      String[] favorite = request.getParameterValues("favorite");
+      
+      return "test01";
+    }
+    
+    
+    
+    -- WebRequest (HttpServletRequest 를 확장함) --
+    
+      사용하는 방법은 HttpServletRequest 과 같음
+    
+    
+    
+    -- @PathVariable --
+    
+      data가 요청주소에 있는 경우,
+      값을 주입받을 수 있는 어노테이션임
+      (RestFul API 서버 프로그래밍 경우 많이 사용함)
+      
+      요청주소/값1/값2/값3
+      
+      
+    -- @RequestParam --
+    
+      parameter 를 직접 주입받음  
+      
+      지정된 변수의 이름과 parameter의 
+      이름을 같게 설정해야 값을 주입받음
+      
+      가능한 경우에는 형변환 처리도 함
+      (숫자 모양의 문자열인 경우 자동으로 int type으로 됨)
+      
+      value : parameter 이름과 변수의 이름이 
+              다를 경우에 parameter의 이름을 지정함
+                                   <-- (value="id")
+              
+      required : false 로 설정하면
+                 지정된 이름의 parameter가 없을 경우,
+                 넘길 때의 변수이름과 
+                 받을 때의 (매개)변수이름이 다른(없는) 경우
+                 null 이 주입됨        
+      
