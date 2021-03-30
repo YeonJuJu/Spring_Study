@@ -1,0 +1,135 @@
+
+  spring Form Element (폼 요소)
+  
+    <form:from /> 태그
+    
+    modelAttribute 
+      
+       ㄴ form 태그 내의 입력 요소들에 적용될
+          value 값을 가진 객체(DTO) 이름
+          이 속성의 값이 id 속성으로 설정됨
+          생략하는 경우,
+          command 라는 문자열이 id값으로 설정됨
+          
+    action : 요청할 주소를 지정함
+             생략하는 경우, 현재 페이지가 설정됨
+             
+    method : 요청방식 지정
+             생략하는 경우, post 방식으로 설정됨       
+             
+    사용례
+        
+    <form id="command" 
+      action="/context path/test01" 
+      method="post">             
+             
+             
+    <form:button /> 태그
+    
+      submit :  버튼을 생성함
+      
+      disabled : true 로 설정하면
+                 button이 비활성화됨        
+             
+    <form:hidden /> 태그
+    
+      hidden type의 input 태그를 생성함
+      
+      path : (modelAttribute 에 설정한 객체의 
+             멤버변수 이름 중 하나여야 함 - 설정한 문자열)
+             설정한 문자열이 id와 name속성값으로 지정됨
+             model 값을 추출해서 value 속성에 주입함         
+             
+             
+    <form:input /> 태그
+    
+      type이 text인 input 태그를 생성함
+      
+      path : (modelAttribute 에 설정한 객체의 
+             멤버변수 이름 중 하나여야 함 - 설정한 문자열)
+             설정한 문자열이 id와 name속성으로 지정됨
+             model 값을 추출해서 value 속성에 주입함        
+             
+             
+    <form:password /> 태그
+    
+      type이 password인 input 태그를 생성함
+      
+      path : (modelAttribute 에 설정한 객체의 
+             멤버변수 이름 중 하나여야 함 - 설정한 문자열)
+             설정한 문자열이 id와 name속성으로 지정됨
+             model 값을 추출해서 value 속성에 주입함              
+             
+      showPassword :  form:password 태그는 path 속성에
+                      값을 지정해도 보이지 않음
+                      showPassword 속성값을 true로 하면
+                      보임
+                      
+      
+    <form:textarea /> 태그
+    
+      textarea 태그를 생성함
+      
+      path : (modelAttribute 에 설정한 객체의 
+             멤버변수 이름 중 하나여야 함 - 설정한 문자열)
+             설정한 문자열이 id와 name속성으로 지정됨
+             model 값을 추출해서 value 속성에 주입함              
+             
+             
+
+    select, checkbox, radio
+    
+    Spring framework 에서 제공하는
+    form custom tag 로
+    select, checkbox, radio button 등을 
+    생성해서 사용할 수 있음
+  
+  
+    -- select --
+    
+    <form:select >
+      <form:option value="d1">항목1</form:option>
+      <form:option value="d2">항목2</form:option>
+      <form:option value="d3">항목3</form:option>
+    </form:select >
+    
+    
+    <form:option> : select 태그의 option 태그 하나 생성
+    <form:options> : select 태그의 option 태그 여러 개 생성
+    items : option 태그들을 생성할 때
+            필요한 data가 담긴 list나 배열
+    
+
+
+
+  <form:checkbox />  <-- checkbox 하나를 생성함
+  <form:checkboxes /> <-- checkbox 여러 개를 생성함
+   
+   items 속성 : checkbox 들을 생성하기 위해
+                필요한 정보가 담겨있는 list나 array
+                
+                
+  <form:radiobutton />   : radiobutton 하나 생성
+  <form:radiobuttons />  : radiobutton 여러 개 생성        
+
+   items 속성 : radiobutton 들을 생성하기 위해
+                필요한 정보가 담겨있는 list나 array
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+             
+             
+             
+             
+             
+                    
+          
+   

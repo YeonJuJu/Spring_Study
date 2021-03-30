@@ -1,0 +1,16 @@
+
+  Request Scope
+  
+    HttpServletRequest
+    
+      새로운 요청이 발생되어 
+      응답결과가 Browser 로 전달될 때까지 
+      요청정보를 담는 객체 (내장객체)
+    
+      Server 개발자가 필요로 할 때
+      data나 객체를 저장할 수 있고
+      Request Scope 안에서만 사용 가능함
+        ㄴ 다음 page까지 memory에 남아있음
+        
+          
+      
