@@ -1,0 +1,11 @@
+
+
+  Session Scope
+  
+  Bean을 정의할 때
+  Session Scope로 정의하면
+  브라우저가 서버에 최초의 요청을 보낼 때
+  Bean객체가 주입됨
+  
+  주입된 Bean은 주입까지만 자동으로 이루어지고
+  Session 영역에 저장되는 부분은 자동으로 되지 않
