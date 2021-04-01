@@ -1,0 +1,36 @@
+
+
+  -- Message --
+  
+    properties 파일을 Message 로 등록해서
+    이 data 를 JSP에서 사용할 수 있음
+    
+    properties 파일을 Message 로 등록하면
+    다국어 처리도 됨
+    
+    
+  -- MessageSource --
+  
+    MessageSource 객체를 이용해서
+    properties 파일을 등록하여
+    Message로 등록함
+    
+    이 때,
+    일정 시간마다 한 번씩 갱신되는
+    ReloadableResourceBundleMessageSource
+    를 사용함
+    
+    
+  -- Java 에서 사용하기  --
+  
+    Message 로 등록된 data를 
+    Java code에서 사용하려면
+    MessageSource를 주입 받아야 함
+    (Spring 이 주입함)
+    
+    다국어 처리를 위해서 Locale을 지정함
+    
+    
+    
+    
+  

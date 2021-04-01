@@ -1,0 +1,59 @@
+
+  -- JSR-303 어노테이션 --
+  
+    Bean 객체에 주입되는 값의 유효성 검사를
+    하기 위해서 제공되는 어노테이션
+    
+    https://beanvalidation.org/1.0/spec/
+    
+    @AssertTrue  : true가 아닌 값이 들어오면 오류 발생
+    @AssertFalse : false가 아닌 값이 들어오면 오류 발생
+    
+    @Max(값) : 값보다  큰 값이 들어오면 오류 발생
+    @Min(값) : 값보다 작은 값이 들어오면 오류 발생
+    
+    @DecimalMax(value=값, inclusive=true/false)
+      value에 설정한 값보다 작거나 같은 값이 들어와야 함
+      inclusive가 false 이면 값을 포함하지 않으므로
+      value에 설정한 값보다 작은 값이 들어와야 함
+      inclusive의 값을 생략하면 기본값은 true임
+      
+    @DecimalMin(value=값, inclusive=true/false)
+      value에 설정한 값보다 크거나 같은 값이 들어와야 함
+      inclusive가 false 이면 값을 포함하지 않으므로
+      value에 설정한 값보다 큰 값이 들어와야 함
+      inclusive의 값을 생략하면 기본값은 true임
+    
+    
+    @Null    : 값이 들어오면 오류 발생 (Null 이 아니면)
+    @NotNull : 값이 들어오지 않으면 오류 발생
+    
+    넘어오는 값(parameter)의 length가 0경우
+      ㄴ Null 이 아님
+      
+     String str1 = null;
+     String str2 = new String("");
+      
+      str2 += "문자"
+      
+    @Digits(integer=자릿수,fraction=자릿수)
+     지정된 자릿수의 숫자가 아닌 경우 오류 발생함
+       integer - 정수 자릿수
+       fraction - 실수 자릿수
+       
+    @Size(min=글자수, max=글자수)
+     지정된 글자수보다 짧거나 길면 오류 발생함   
+      
+      
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

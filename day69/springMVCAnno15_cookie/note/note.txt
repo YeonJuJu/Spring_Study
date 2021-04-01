@@ -1,0 +1,42 @@
+
+  Cookie
+  
+    최초로 사용자(client) web browser 가
+    서버에 접속했을 때, 서버에서 만들어서 
+    사용자(client) web browser 에 보냄(저장)
+    
+    요청(request)에 대한 응답(response)으로 
+    cookie 정보가 client에게 전달되면    
+    web browser 가 (해당 정보를) cookie 에 저장함
+    
+    ㄴ Browser 로 보낼 응답(response)에
+       cookie 정보를 담아서 보내면
+       Browser 에 의해서 cookie가 저장됨
+    
+    
+    사용자(client) web browser 에 저장되는 data
+    
+    (두 번째부터)
+    request(요청)이 발생했을 때
+    web browser는 cookie에 저장된 정보를
+    server 에 전달함
+    
+    
+    cookie 는 사용자 browser(client)에 저장되므로
+    browser(client) 가 server에게 전달해 줄 때만 
+    cookie 정보를 사용할 수 있음 
+    
+    
+    
+    -- Cookie 읽어오기 --
+    
+      Cookie 정보는 browser 가 요청(request)을 
+      발생시켰을 때 요청 정보에 같이 담아서
+      server 에 전달함
+      
+      JSP 에서는 cookie 정보를 배열로 받아서 사용함
+      
+      SpringMVC 에서는 cookie 정보를 주입 받아서 사용함
+    
+    
+    

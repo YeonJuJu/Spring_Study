@@ -1,0 +1,107 @@
+
+  -- 유효성 검사 --
+  
+    WebApplicaion 에서 
+    사용자 입력에 대해서
+    유효성을 검사하는 경우,
+    JavaScript로 처리할 수도 있으나,
+    SpringMVC로 처리할 수도 있음
+    
+    Bean에 data가 입력될 때 
+    어떤 검사를 할 것인지 어노테이션으로 지정하고
+    지정된 조건에 맞지 않으면 입력값에 오류가 있다는
+    정보를 전달함
+    
+    
+    hibernate 라이브러리를 사용해서 
+    어노테이션을 사용할 수 있음
+    
+    https://mvnrepository.com/
+    
+    > javax validation  >  Bean Validation API
+    
+    (Bean Validation API » 2.0.1.Final)
+    
+      <dependency>
+	    <groupId>javax.validation</groupId>
+	    <artifactId>validation-api</artifactId>
+	    <version>2.0.1.Final</version>
+	  </dependency>
+	  
+    
+    > hibernate validator > 
+    
+    Hibernate Validator Engine » 6.1.6.Final
+    
+      <dependency>
+	    <groupId>org.hibernate.validator</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>6.1.6.Final</version>
+	  </dependency>
+	  
+    
+  -- Bean 에서 어노테이션으로 설정하기 --
+  
+	  @Size(min=2, max=10)
+	  private String name;
+	 
+	  @Max(100)
+	  private int age;
+	    
+	    
+  -- 유효성 검사 --  @Valid
+  
+    Controller 의 메소드에서 주입 받는 Bean에
+    @Valid 를 설정하면 유효성 검사를 함
+    
+    BindingResult 객체를 주입 받아야
+    유효성 검사 결과를 사용할 수 있음
+    
+    BindingResult 객체에는 유효성 검사를
+    실행한 결과 정보가 담겨있음
+    
+    <-- 사용자가 Controller에서 입력한 값이
+        문제가 있는지 없는지 알 수 있음
+    
+    
+    
+  -- Properties 를 사용해서 메세지 설정하기 --
+  
+    유효성 조건에 위배되면
+    JSP에 오류관련 정보가 전달됨
+    
+    codes[0] 으로 값을 확인해보면
+    "에러종료.빈이름.프로퍼티이름"
+    을 확인할 수 있음
+    
+    properties 파일에 위의 양식으로 
+    커스터마이징한 메세지를 등록해서
+    사용할 수 있음
+    다국어 처리도 가능함 
+    
+    "에러종료.빈이름.프로퍼티이름"
+    
+    Size.dataDTO1.name = 이름은 2글자 이상, 10글자 이내로 입력해 주세요
+    Max.dataDTO1.age = 나이는 100세 이하로 입력해 주세요
+    
+    <spring:message code="${errors.getFieldError('name').codes[0]}" />
+    
+    
+  -- Form 데이터 유지하기 --
+  
+    유효성 조건에 위배되는 값이 있는 경우
+    다시 입력 페이지로 돌아올 때
+    유효성 조건을 만족하는 값을 유지시켜야 하는 경우
+    
+    입력 화면에서 전달된 Bean객체(dataDTO2)에서
+    input 태그에 값을 주입하게 함
+    
+    SpringMVC의 Form 커스텀 태그를 사용함
+    
+    유효성 조건에 위배되어 검증에 실패한 
+    문자열도 다시 세팅할 수 있음
+    
+    
+    
+    
+    
