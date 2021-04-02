@@ -1,0 +1,20 @@
+
+  -- JSR-308 어노테이션 --
+  
+    https://beanvalidation.org/2.0/spec
+    
+    @NotEmpty : 주입된 값의 길이가 0 일 때 오류 발생함
+                (공백도 글자로 인식함)
+    @NotBlank : 주입된 값의 공백을 제거한 길이가 
+                 0 일 때 오류 발생함          
+    @Positive : 양수가 아닐 때 오류 발생함
+                type이 정수형만 가능함
+    @PositiveOrZero : 0 또는 양수가 아닌 경우 오류 발생함
+                      type이 정수형만 가능함
+    @Negative : 음수가 아닐 때 오류 발생함
+                type이 정수형만 가능함
+    @NegativeOrZero : 0 또는 음수가 아닌 경우 오류 발생함
+                      type이 정수형만 가능함
+    @Email : 중간에 @가 있는지 없는지 확인. 없으면 오류 발생
+                      
+                                                       
