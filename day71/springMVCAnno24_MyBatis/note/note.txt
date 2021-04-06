@@ -1,0 +1,154 @@
+
+  -- MyBatis --
+  
+    Java 를 사용해서 DB와 연동하는
+    기술을 JDBC라고 함
+    
+    MyBatis는 JDBC 프로그래밍을
+    보다 편리하게 할 수 있도록 함
+    
+    MyBatis는 Spring Framework에서 
+    이용할 수 있도록 library를 제공함
+    
+  -- Library 추가하기 --
+     
+    DataBase Driver jar
+    https://mvnrepository.com/
+    
+    
+    ojdbc6.jar
+    
+    
+    spring jdbc
+    https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc6/11.2.0.4
+    
+    dbcp
+    https://mvnrepository.com/search?q=dbcp
+    https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
+    https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2/2.7.0
+    
+    mybatis
+    https://mvnrepository.com/artifact/org.mybatis/mybatis
+    https://mvnrepository.com/artifact/org.mybatis/mybatis/3.5.5
+        
+    mybatis-spring
+    https://mvnrepository.com/artifact/org.mybatis/mybatis-spring/2.0.5
+    
+    
+  
+  
+  spring jdbc
+  
+  
+  
+  -- properties 파일 작성하기 --
+  
+    DataBase 접속 정보를 
+    properties 파일에 작성함
+    
+    database.classname = oracle.jdbc.OracleDriver
+    database.url = jdbc:oracle:thin:@localhost:1521:xe
+    database.username = thezone
+    database.password = 1111
+    
+    
+  -- Mapper 작성하기 --
+  
+    Mapper 는 Query문을 작성하는 파일
+    
+    
+    public interface MapperInterface{
+      
+      @Insert("insert into spmvc values 
+      ("#{data1}, #{data2}, #{data3})")
+      void insert_data(DataDTO1 dto1);
+      
+      @Select("select * from spmvc")
+      List<DataDTO1> select_data();
+    }
+    
+    
+    
+  -- BasicDataSource Bean 정의하기 --
+  
+    BasicDataSource 는 
+    DataBase 접속 정보를 관리하는 객체
+    
+    @Bean
+    public BasicDataSource dataSource(){
+      BasicDataSource source = 
+        new BasicDataSource();
+        
+      source.setDriverClassName(dbClassname);
+      source.setUrl(dbUrl);
+      source.setUsername(dbUsername);
+      source.setPassword(dbPassword);
+      
+      return source;
+    }
+  
+  
+  
+  -- SqlSessionFactory Bean 정의하기 -- 
+  
+  
+    SqlSessionFactory 는 접속과 Query를 관리함
+    
+    @Bean
+    public SqlSessionFactory factory
+    (BasicDataSource source) throws Exception{
+      
+      SqlSessionFactoryBean factoryBean = 
+        new SqlSessionFactoryBean();
+      factoryBean.setDataSource(source);
+
+      SqlSessionFactory factory = 
+          factoryBean.getObject();
+          
+      return factory;
+        
+    }
+  
+    
+  -- Mapper Bean 정의하기 --
+  
+    Query 문을 관리하는 Mapper 정의하기
+    Mapper 를 주입받아서 Query 문을 실행함
+    
+    // Query 문 실행을 위한 객체
+    @Bean
+    public MapperFactoryBean<MapperInterface> testMapper
+    (SqlSessionFactory factory) throws Exception{
+      
+      MapperFactoryBean<MapperInterface> factoryBean = 
+        new MapperFactoryBean<MapperInterface>
+        (MapperInterface.class);
+      factoryBean.setSqlSessionFactory(factory);
+      
+      return factoryBean;  
+        
+    }
+    
+    
+  
+  -- Mapper 주입하기 --
+  
+    @Autowired
+    MapperInterface mapper01;
+    
+    
+  -- table 만들기 --
+  
+  
+  create table spmvc(
+    name  varchar2(100) not null,
+    id    varchar2(100) not null,
+    psswd varchar2(100) not null
+  ); 
+  
+  insert into spmvc (name, id, psswd) values('이순신', 'lee', '1111');
+  
+  insert into spmvc (name, id, psswd) 
+  values(#{name}, #{id}, #{psswd});
+  
+   

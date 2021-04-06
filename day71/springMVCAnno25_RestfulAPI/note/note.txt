@@ -1,0 +1,52 @@
+
+  -- Restful API --
+
+    기존방식 
+    응답결과를
+    화면을 구성하는 code 
+    (HMTL, CSS, JavaScript)로
+    전달함
+    
+    Restful API  
+    응답 결과를 data만으로 구성해서
+    client에 전달하는 서비스 방법
+    
+    웹, 모바일, PC 등 다양한 플랫폼으로 
+    data 를 전달할 때 사용함
+    
+    
+    @RestController
+    
+      Spring MVC 에서 Controller 를 구성할 때
+      @Controller 를 사용하면 return 하는 값은
+      사용할 JSP 를 지정함
+      
+      @RestController 를 통해 return하면
+      return 하는 값 자체를
+      browser 로 전달하는 응답결과로 
+      생성해서 보냄
+      
+      
+      
+      -- JSON --
+      
+      
+    jackson 라이브러리  
+    https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind  
+      
+    java의 객체나 list를 JSON 객체로 만들어줌
+    
+    
+    JSON : JavaScript Object Notation
+    
+    {property:value, property:value, property:value}
+    
+    
+    class Student{
+    
+      String name;  ---->   {"name":"이순신", "age":48}
+      int age;
+    
+    }
+    
+    
