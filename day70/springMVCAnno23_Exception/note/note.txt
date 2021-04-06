@@ -1,0 +1,53 @@
+
+  -- Exception Handling (예외처리) --
+  
+    프로그램 실생 중 오류가 발생하면
+    프로그램이 중단됨
+    
+    예외를 처리해서 
+    프로그램이 정상적으로 종료되도록 함
+    
+    웹 애플리케이션에서 예외가 발생하면
+    예외 발생시 보여줄 jsp를 준비해서
+    응답결과로 
+    준비한 jsp 를 browser에게 전달함
+    
+    
+  -- @ExceptionHandler --
+  
+    Controller 에서 @ExceptionHandler 를 통해서
+    메소드를 정의하면 예외 발생시 이 메소드가 호출됨
+    
+    이 메소드가 return 하는 JSP 정보를 통해서
+    응답결과 화면을 만들고 이 응답결과를
+    browser에게 전달함
+    
+    
+    (ex)
+    
+    @ExceptionHandler(ArrayIndexOutOfBoundsException.class)
+    public String exception01(){
+      return "error01";
+    } 
+  
+  
+  -- Global Exception Handler --
+  
+    @ExceptionHandler 는 Controller 마다 작성해야 함
+    
+    Global Exception Handler 를 구현하여
+    Controller 에 정의된 @ExceptionHandler 중에
+    해당 예외에 대한 내용이 없는 경우,
+    Global Exception Handler 로 이동하여
+    예외 처리를 함
+  
+  
+  
+  
+  
+      
+      
+      
+      
+      
+      
