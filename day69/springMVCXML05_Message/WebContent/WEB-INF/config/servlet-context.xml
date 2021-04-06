@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans 
+       xmlns="http://www.springframework.org/schema/mvc"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:beans="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+                      http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                      http://www.springframework.org/schema/beans 
+                      http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/context
+                      http://www.springframework.org/schema/context/spring-context.xsd">
+                      
+
+  <!-- 
+    스캔한 클래스 내부의 클래스 중
+    @Controller Annotation 을 가지고 있는
+    클래스들이 Controller 로 동작하게 함  
+  -->
+  <!-- Annotation 이 가능하도록 설정하기  -->
+  <annotation-driven />
+  
+  <!-- Scan 할 Bean 들이 모여있는 package 를 지정함 -->
+  <context:component-scan base-package="com.tjoeun.spring.controller" />
+  <context:component-scan base-package="com.tjoeun.spring.bean" />
+  
+  <!-- 
+    Controller 에서 return하는 문자열(경로)에
+    접두사, 접미사 설정하기 
+  -->
+  <!-- ViewResolver : View 해석기 -->
+  <beans:bean 
+  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:property name="prefix" value="/WEB-INF/views/" />
+    <beans:property name="suffix" value=".jsp" />
+  </beans:bean>
+  
+  <!-- 프로젝트에서 사용하는 정적 파일 경로 설정하기 -->
+  <!-- 이미지, 사운드, 동영상, js, css 등 -->
+  <resources mapping="/**" location="/resources/" />  
+
+  <!--  MessageSource 등록하기 -->
+  <beans:bean 
+     id="messageSource"
+  class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <!-- <beans:property name="basename" value="/WEB-INF/properties/data1"/> -->
+    <beans:property name="basenames">
+      <beans:list>
+        <beans:value>/WEB-INF/properties/data1</beans:value>
+        <beans:value>/WEB-INF/properties/data2</beans:value>
+      </beans:list>    
+    </beans:property>  
+  </beans:bean>
+  
+  <!-- MessageSource 를 사용하기 위한 Accessor 등록하기  -->
+  <beans:bean 
+     id="messageSourceAccessor"
+  class="org.springframework.context.support.MessageSourceAccessor">
+    <beans:constructor-arg ref="messageSource" />
+  </beans:bean>   
+</beans:beans>
+
+
+
+
+
+
+
+
+
