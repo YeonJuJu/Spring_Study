@@ -1,0 +1,10 @@
+package com.tjoeun.spring.mapper;
+
+import org.apache.ibatis.annotations.Select;
+
+public interface UserMapper {
+
+	@Select("SELECT USER_NAME FROM USER_TABLE WHERE USER_ID = #{user_id}")
+	String checkID(String user_id);
+	
+}
