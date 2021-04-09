@@ -157,8 +157,8 @@ public class ServletAppContext implements WebMvcConfigurer{
   	// /** : 모든 요청의 주소에 대해서 interceptor가 동작함
   	reg1.addPathPatterns("/**");
   	
-  	reg2.addPathPatterns("/user/modify");
-  	
+  	reg2.addPathPatterns("/user/modify", "/user/logout", "/board/*");
+  	reg2.excludePathPatterns("/board/main");
 	}
 	
 	// properties 폴더 안에 있는
