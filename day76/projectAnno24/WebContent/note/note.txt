@@ -1,0 +1,138 @@
+
+
+  AJAX : Asynchronous Javascript And XML
+         Asynchronized 
+
+	
+	로그인하지 않으면
+	회원정보 수정 페이지로 접근하지 못하도록 함
+	
+	Interceptor에서 로그인 되었는지 확인하고
+	로그인 되었을 경우에만 접근할 수 있도록 함
+	
+	
+	파일 업로드시
+	form tag 에 
+	설정해야 하는 속성
+	
+	enctype="multipart/form-data
+	
+	  ㄴ 문자열 타입 데이터와
+	     다른 형식의 파일들을 모두
+	     server로 전송할 수 있게 해줌 
+	     
+	      
+	enctype="multipart/form-data
+	를 설정했을 때
+	data가 전송되는 방식이 달라져서
+	유효성검사가 정상적으로 되지 않음
+	(데이터가 기존의 방식으로는 전송되지 않음)
+	
+	servletAppContext.java에
+	
+	Bean을 등록해서 해결함
+	"StandardServletMultipartResolver"
+	enctype="multipart/form-data
+	를 설정했을 때
+	data가 정상적으로 전송되게 함
+
+
+    파일을 업로드하는 경우,
+    반드시 절대경로를 지정해야 함
+     ㄴ 서버에 이 경로를 등록해야 함
+     
+     
+    파일 첨부를 안 하는 경우,
+    ContentDTO 의 content_file에는 null이 저장되고
+    database 의 CONTENT_TABLE 의 CONTENT_FILE 컬럼에도
+    NULL 이 저장되는데, 이 경우 MyBatis 에서
+    #{content_file, jdbcType=VARCHAR}
+    와 같이 jdbcType=VARCHAR 설정을 해 주어야
+               ㄴ type을 명시함 
+    오류가 발생하지 않음
+    
+
+    23) 글 읽는 페이지 (상세페이지) 구성하기
+        글 목록에서 글을 클릭하면 글 읽는 페이지로 이동하기
+        글쓰기를 새로 했을 때 작성된 글 읽는 페이지로 이동하기
+
+
+
+   < 게시글 작성한 후 바로 자신의 글이 보여지는 순서 >
+   
+   글쓰기 페이지(write.jsp)에서 글을 다 작성하고
+   작성하기 버튼을 누르면
+   BoardController의 "board/write_proc" 메소드(writeProc)으로
+   이동함
+   
+   여기서 parameter (@ModelAttribute) 로 주입받은
+   객체(writeContentDTO)의 주소를 boardService.addContentInfo(writeContentDTO)을
+     ㄴ 현재 writeContentDTO에는 글쓴이가 write.jsp에서
+        입력한 내용들이 저장되어있음
+   실행하면서 argument로 넣어줌
+   
+   service -> dao -> mapper 로 가면서 동일한 주소(객체)가 전달됨
+   
+   @Insert 를 실행하기 전에
+   @SelectKey 를 실행해서
+   현재 content_seq의 값에서 하나 증가한 값을 구해서
+     ㄴ select content_seq.nextval from dual
+   mapper로 전달한 객체(BoardController -> service -> dao -> mapper)
+   [writeContentDTO]의 멤버변수 content_idx에 저장함
+   
+   이후,
+      @Insert 의 value(#{content_idx}...)에 이 값이 전달되어
+      현재 insert되는 게시글의 content_idx값이 됨
+        ㄴ 게시글 번호가 하나 증가됨
+        
+        
+     <-- 이렇게 해야
+         DB의 CONTENT_TABLE에 새로 저장되는 글의 content_idx도
+         하나 증가하고 writeContetnDTO의 멤버변수 content_idx의
+         값도 하나 증가됨
+         
+     ㄴ BoardController의 
+        @PostMapping("/write_proc")
+	    public String writeProc    메소드 속에 있는
+	    writeContetnDTO의 멤버변수 content_idx는 위에서 
+	    하나 증가한 값을 가지고 있게 됨
+	    
+	 ㄴ 이 증가된 content_idx 값을
+	    return "board/write_success"; 으로 실행되는
+	    write_success.jsp에서 EL로 사용할 수 있음
+	    
+	 ㄴ location.href = '${root}board/read?board_info_idx=${writeContentDTO.content_board_idx}&content_idx=${writeContentDTO.content_idx}';   
+	    
+	      ㄴ read.jsp 로 페이지 이동하면서 
+	         get방식으로
+	         board_info_idx 값과
+	         content_idx의 값을 
+	         BoardController 의
+	         @GetMapping("/read")
+	         public String read 에 전달함
+	         
+	 ㄴ @GetMapping("/read")
+	    public String read     에서
+	    @RequestParam("board_info_idx") int board_info_idx,
+	    @RequestParam("content_idx") int content_idx
+	    으로 주입받은 
+	    
+	    board_info_idx 을	    
+	    model.addAttribute("board_info_idx", board_info_idx)
+	     ㄴ Request 객체에 저장하고
+	         ㄴ 이 값은 "목록보기"버튼을 눌렀을 때
+	            해당 게시판의 글들만 출력하고자 할 때 사용함
+	            
+	    content_idx 는
+	    ContentDTO readContentDTO
+		  = boardService.getContentInfo(content_idx); 으로
+		방금 작성한 글을 가져오기 위해서 사용함
+		  
+		  
+		방금 작성한 글을 가져온 후
+		model.addAttribute("readContentDTO", readContentDTO);
+		  ㄴ Request 객체에 저장함
+		      ㄴ read.jsp에서 EL을 사용해서
+		         내용을 화면에 출력함
+		         
+		         
