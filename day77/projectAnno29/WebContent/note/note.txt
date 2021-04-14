@@ -1,0 +1,302 @@
+
+
+  AJAX : Asynchronous Javascript And XML
+         Asynchronized 
+
+	
+	로그인하지 않으면
+	회원정보 수정 페이지로 접근하지 못하도록 함
+	
+	Interceptor에서 로그인 되었는지 확인하고
+	로그인 되었을 경우에만 접근할 수 있도록 함
+	
+	
+	파일 업로드시
+	form tag 에 
+	설정해야 하는 속성
+	
+	enctype="multipart/form-data
+	
+	  ㄴ 문자열 타입 데이터와
+	     다른 형식의 파일들을 모두
+	     server로 전송할 수 있게 해줌 
+	     
+	      
+	enctype="multipart/form-data
+	를 설정했을 때
+	data가 전송되는 방식이 달라져서
+	유효성검사가 정상적으로 되지 않음
+	(데이터가 기존의 방식으로는 전송되지 않음)
+	
+	servletAppContext.java에
+	
+	Bean을 등록해서 해결함
+	"StandardServletMultipartResolver"
+	enctype="multipart/form-data
+	를 설정했을 때
+	data가 정상적으로 전송되게 함
+
+
+    파일을 업로드하는 경우,
+    반드시 절대경로를 지정해야 함
+     ㄴ 서버에 이 경로를 등록해야 함
+     
+     
+    파일 첨부를 안 하는 경우,
+    ContentDTO 의 content_file에는 null이 저장되고
+    database 의 CONTENT_TABLE 의 CONTENT_FILE 컬럼에도
+    NULL 이 저장되는데, 이 경우 MyBatis 에서
+    #{content_file, jdbcType=VARCHAR}
+    와 같이 jdbcType=VARCHAR 설정을 해 주어야
+               ㄴ type을 명시함 
+    오류가 발생하지 않음
+    
+
+    23) 글 읽는 페이지 (상세페이지) 구성하기
+        글 목록에서 글을 클릭하면 글 읽는 페이지로 이동하기
+        글쓰기를 새로 했을 때 작성된 글 읽는 페이지로 이동하기
+
+
+
+   < 게시글 작성한 후 바로 자신의 글이 보여지는 순서 >
+   
+   
+   글쓰기 페이지(write.jsp)에서 글을 다 작성하고
+   작성하기 버튼을 누르면
+   BoardController의 "board/write_proc" 메소드(writeProc)으로
+   이동함
+   
+   여기서 parameter (@ModelAttribute) 로 주입받은
+   객체(writeContentDTO)의 주소를 boardService.addContentInfo(writeContentDTO)을
+     ㄴ 현재 writeContentDTO에는 글쓴이가 write.jsp에서
+        입력한 내용들이 저장되어있음
+   실행하면서 argument로 넣어줌
+   
+   service -> dao -> mapper 로 가면서 동일한 주소(객체)가 전달됨
+   
+   @Insert 를 실행하기 전에
+   @SelectKey 를 실행해서
+   현재 content_seq의 값에서 하나 증가한 값을 구해서
+     ㄴ select content_seq.nextval from dual
+   mapper로 전달한 객체(BoardController -> service -> dao -> mapper)
+   [writeContentDTO]의 멤버변수 content_idx에 저장함
+   
+   이후,
+      @Insert 의 value(#{content_idx}...)에 이 값이 전달되어
+      현재 insert되는 게시글의 content_idx값이 됨
+        ㄴ 게시글 번호가 하나 증가됨
+        
+        
+     <-- 이렇게 해야
+         DB의 CONTENT_TABLE에 새로 저장되는 글의 content_idx도
+         하나 증가하고 writeContetnDTO의 멤버변수 content_idx의
+         값도 하나 증가됨
+         
+     ㄴ BoardController의 
+        @PostMapping("/write_proc")
+	    public String writeProc    메소드 속에 있는
+	    writeContetnDTO의 멤버변수 content_idx는 위에서 
+	    하나 증가한 값을 가지고 있게 됨
+	    
+	 ㄴ 이 증가된 content_idx 값을
+	    return "board/write_success"; 으로 실행되는
+	    write_success.jsp에서 EL로 사용할 수 있음
+	    
+	 ㄴ location.href = '${root}board/read?board_info_idx=${writeContentDTO.content_board_idx}&content_idx=${writeContentDTO.content_idx}';   
+	    
+	      ㄴ read.jsp 로 페이지 이동하면서 
+	         get방식으로
+	         board_info_idx 값과
+	         content_idx의 값을 
+	         BoardController 의
+	         @GetMapping("/read")
+	         public String read 에 전달함
+	         
+	 ㄴ @GetMapping("/read")
+	    public String read     에서
+	    @RequestParam("board_info_idx") int board_info_idx,
+	    @RequestParam("content_idx") int content_idx
+	    으로 주입받은 
+	    
+	    board_info_idx 을	    
+	    model.addAttribute("board_info_idx", board_info_idx)
+	     ㄴ Request 객체에 저장하고
+	         ㄴ 이 값은 "목록보기"버튼을 눌렀을 때
+	            해당 게시판의 글들만 출력하고자 할 때 사용함
+	            
+	    content_idx 는
+	    ContentDTO readContentDTO
+		  = boardService.getContentInfo(content_idx); 으로
+		방금 작성한 글을 가져오기 위해서 사용함
+		  
+		  
+		방금 작성한 글을 가져온 후
+		model.addAttribute("readContentDTO", readContentDTO);
+		  ㄴ Request 객체에 저장함
+		      ㄴ read.jsp에서 EL을 사용해서
+		         내용을 화면에 출력함
+		         
+		         
+		         
+		         
+	< 글 수정 - 권한 처리 >
+	
+	수정과 삭제 버튼은 로그인한 사람과
+	작성한 사람이 같은 경우에만 보여짐
+	
+	Interceptor 로 처리해서
+	직접 주소를 입력해서 요청하지 못하도록 함
+	
+	
+	글 작성한 사람이 누구인지 정보 알아보기
+	
+	1) mapper에서
+	   @Select 
+	   ContentDTO getContentInfo(int content_idx);
+	   
+	   이 select  문에
+	   C.CONTENT_WRITER_IDX 컬럼 추가함
+	   (수정, 삭제시 어떤 사람이 쓴 글인지 확인하기
+	   C.CONTENT_WRITER_IDX 도 SELECT 해서 가져오면 됨)
+	    ㄴ readContentDTO 의 멤버변수 content_writer_idx에 저장
+	    
+	    read.jsp에서 로그인한 사람과 글 쓴 사람이 같은 경우에만
+	    수정하기, 삭제하기 버튼이 보이도록 함
+	    <c:if test="${loginUserDTO.user_idx == readContentDTO.content_writer_idx }">
+	   
+	 2) BoardController에서
+	 
+	   @Resource(name = "loginUserDTO")
+	   private UserDTO loginUserDTO;
+	   loginUserDTO 주입받아서 
+	   
+	   model.addAttribute("loginUserDTO", loginUserDTO);
+	   Request 객체에 저장하고
+	   
+	   view로 지정한 read.jsp에서 EL로 사용함
+	   <c:if test="${loginUserDTO.user_idx == readContentDTO.content_writer_idx }">
+	   
+	   
+	   
+	3) Interceptor 사용하기
+	    0. CheckWriterInterceptor 작성하기
+	 
+	    1. 
+	  	@GetMapping("/not_writer")
+	    public String notWriter() {
+		  return "/board/not_writer";
+	    }
+	    
+	    2. not_writer.jsp 작성하기
+	    
+	    3. ServletAppContext.java에 
+	       CheckWriterInterceptor 등록하기
+	       
+		  Annotation 방식에서는 자동주입이 안 되므로
+		  생성자를 작성해야 함
+	       
+	       
+	       
+	   < 글 수정하기 - 수정할 때 이미지 첨부하지 않으면
+	                   기존 이미지를 유지하도록 함 >
+	                   
+	                   
+	   read.jsp에서 글을 보다가 수정하고 싶을 때
+	   수정하기 버튼을 누르면
+	   @GetMapping("/modify")
+	   public String modify  이곳으로 이동하고....
+	   
+	   @RequestParam("board_info_idx") int board_info_idx,
+	   @RequestParam("content_idx") int content_idx
+	     ㄴ read.jsp에서 수정하기 버튼을 누를 때
+	        get방식으로 넘겨준 값
+	        
+	  @RequestParam("board_info_idx") int board_info_idx
+	     <-- Request "board_info_idx"라는 이름으로 객체에 저장된      
+	         data를 꺼내서
+	         매개변수 int board_info_idx 에 저장함
+	  @RequestParam("content_idx") int content_idx
+	     <-- Request "content_idx"라는 이름으로 객체에 저장된      
+	         data를 꺼내서
+	         매개변수 int content_idx 에 저장함
+	        
+	        
+	  model.addAttribute("board_info_idx", board_info_idx);
+      model.addAttribute("content_idx", content_idx);
+		      
+	     ㄴ Request 객체에 
+	        "board_info_idx",  "content_idx" 라는 이름으로
+	        board_info_idx, content_idx 를 저장함
+	        (다음 페이지에서 사용하려고...)
+	        
+	  modifyContentDTO.setContent_board_idx(board_info_idx);
+	  modifyContentDTO.setContent_idx(content_idx);      
+	        
+	       ㄴ modify.jsp (수정 작업을 하는 페이지)
+	          에서 현재  modify 메소드에 전달받은 (from read.jsp)
+	          board_info_idx, content_idx 값을 사용하기 위함
+	                        
+	       
+	      ContentDTO fromDBContentDTO
+		  = boardService.getContentInfo(content_idx); 
+	      content_idx에 해당하는 글의 내용을 DB에서 가져와서
+	      fromDBContentDTO저장하고
+	    
+	
+	    
+	    modifyContentDTO.setContent_writer_name
+		(fromDBContentDTO.getContent_writer_name());
+		modifyContentDTO.setContent_date
+		(fromDBContentDTO.getContent_date());
+		modifyContentDTO.setContent_subject
+		(fromDBContentDTO.getContent_subject());
+		modifyContentDTO.setContent_text
+		(fromDBContentDTO.getContent_text());
+		modifyContentDTO.setContent_file
+		(fromDBContentDTO.getContent_file());
+		modifyContentDTO.setContent_writer_idx
+		(fromDBContentDTO.getContent_writer_idx());
+		modifyContentDTO.setContent_board_idx(board_info_idx);
+		modifyContentDTO.setContent_idx(content_idx);  
+	 
+	    
+	fromDBContentDTO에 저장한 값을 modifyContentDTO에 복사함
+	
+	
+	modify.jsp에서
+		spring custom tag 의 modelAttribute 속성에 지정하여
+		이곳에서 값이 setting된 멤버변수들의 값들이
+		modify.jsp 화면에 출력되도록 함
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		         
+		         
+		         
+		
+		
+		
+		
+		
+		
+		
+		         
+		         
+		         
